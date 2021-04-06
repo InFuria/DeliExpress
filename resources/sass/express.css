@@ -220,13 +220,30 @@ button text {
 }
 
 .btn-e-primary {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
+    width: 140px;
+    height: 36px;
 
-    background: #FD4F00;
+    /* Button */
+
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    color: white;
+    border: 1px solid #FD4F00;
+    background-color: #FD4F00;
+    box-sizing: border-box;
+    border-radius: 4px;
 
     box-shadow: 0px 4px 10px rgba(253, 79, 0, 0.23);
     border-radius: 4px;
@@ -246,14 +263,27 @@ button text {
 }
 
 .btn-e-disabled {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
 
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    /* White-ish */
+
+    color: #FFFFFF !important;
     background: #E5E5E5;
     border-radius: 4px;
+    box-shadow: 0px 4px 10px rgba(151, 151, 151, 0.2);
 }
 
 .btn-out-default {
@@ -269,13 +299,28 @@ button text {
 }
 
 .btn-out-primary {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
+    width: 140px;
+    height: 36px;
 
+    /* Button */
+
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    color: #FD4F00;
     border: 1px solid #FD4F00;
+    background-color: white;
     box-sizing: border-box;
     border-radius: 4px;
 }
@@ -293,19 +338,50 @@ button text {
 }
 
 .btn-out-disabled {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
+    width: 140px;
+    height: 36px;
+
+    /* Button */
+
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    /* Gray-ish light */
+
+    color: #979797;
 
     border: 1px solid #E5E5E5;
     box-sizing: border-box;
     border-radius: 4px;
-
-    color: #E5E5E5;
+    background-color: white;
 }
 
+.btn-header {
+    display: block;
+    width: 100%;
+    border: 0;
+
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.12rem;
+
+    background-color: white;
+    color: #FD4F00;
+}
 
 /** HEADERS **/
 h1{
@@ -509,6 +585,53 @@ label text {
     color: #393E41;
 }
 
+.label-text-form {
+    width: auto;
+    height: 20px;
+
+    /* Label */
+
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13.6px;
+    line-height: 20px;
+    /* identical to box height, or 147% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+
+    /* Gray-ish dark */
+
+    color: #979797;
+}
+
+.label-primary-form {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15.5px;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    margin-bottom: 0.80rem;
+
+    color: #FD4F00;
+}
+
+.label-primary {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 20px;
+
+    letter-spacing: 0.25px;
+
+    color: #FD4F00;
+}
+
+
 caption {
     font-family: Mulish;
     font-style: normal;
@@ -533,6 +656,23 @@ caption {
     align-items: center;
     letter-spacing: 1.5px;
     text-transform: uppercase;
+}
+
+.text-active {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+
+    color: white !important;
 }
 
 .text-default {
@@ -610,6 +750,14 @@ caption {
     margin-left: 5%;
 }*/
 
+.card-title {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    color: white;
+}
 .icon-sidebar {
     color: #E5E5E5;
     padding-left: 3%;
@@ -689,4 +837,72 @@ input[type="checkbox"]:checked {
     background: #FD4F00;
 }
 
+.header-active {
+    border-bottom: #FD4F00 2px solid;
+}
 
+.header-inactive {
+    border-bottom: 0;
+    color: #979797 !important;
+}
+
+.input-out {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    height:28px;
+    line-height:28px;
+
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #979797;
+    color: #979797 !important;
+
+    margin:0;
+    width: 100%;
+}
+
+.input-out::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #979797 !important;
+    opacity: 0.8; /* Firefox */
+}
+
+.choices__list--multiple .choices__item {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+
+    background-color: #FF7334 !important;
+    border: 1px solid #FF7334 !important;;
+}
+
+.choices__input {
+    font-family: Mulish;
+    font-style: normal;
+
+    outline: 0 !important;;
+    border-width: 0 0 1px !important;;
+    border-color: #979797 !important;;
+    color: #979797 !important;
+    background-color: white !important;
+}
+
+.choices__inner {
+    outline: 0 !important;
+    border-width: 0 0 1px !important;
+    border-color: #979797 !important;
+    color: #979797 !important;
+
+    background-color: white !important;
+    padding: 7.5px 7.5px 3.75px;
+    /*border-radius: 2.5px;*/
+}
+
+.choices[data-type*=select-multiple] .choices__button, .choices[data-type*=text] .choices__button {
+    border-left: 1px solid #E5E5E5 !important;
+}
+
+/*.choices__item choices__item--choice has-no-choices {
+
+}*/

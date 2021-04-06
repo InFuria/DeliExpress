@@ -11,12 +11,18 @@
 |
 */
 
+Route::get('test', function (){
+    return view('auth.passwords.reset_solicitude');
+});
 
 Auth::routes(['verify' => true]);
+Route::get('logout', 'Auth\LoginController@logout')->name('direct-logout');
+Route::post('password/assign/{user}', 'Auth\ResetPasswordController@assignPassword')->name('password.assign');
 
 Route::group(['namespace' => 'General', 'middleware' => ['auth', 'verified']], function() {
 
     Route::get('/', 'DashboardController@index')->name('home');
+
 
     Route::resource('users', 'UserController');
     Route::get('users/profile','UserController@profile')->name('users.profile'); // solo para ver el perfil propio
@@ -25,16 +31,6 @@ Route::group(['namespace' => 'General', 'middleware' => ['auth', 'verified']], f
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
 
-    /*
-    |-----------------------------------------
-    |Dashboard and Account Setting & Logout
-    |-----------------------------------------
-    */
-    /*Route::get('home','UserController@home');
-    Route::get('setting','UserController@setting');
-    Route::post('setting','UserController@update');
-    Route::get('logout','UserController@logout');
-    Route::get('status','UserController@status');*/
 
         /*
         |--------------------------------------

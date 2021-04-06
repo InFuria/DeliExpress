@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5d58f8c9974312a2d7410d298964d67",
+    "content-hash": "fe47a9501e09ed2ac10b9cf45e33055c",
     "packages": [
         {
             "name": "conekta/conekta-php",
@@ -840,6 +840,10 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
+            "support": {
+                "issues": "https://github.com/LaravelCollective/html/issues",
+                "source": "https://github.com/LaravelCollective/html"
+            },
             "time": "2019-09-05T12:32:25+00:00"
         },
         {

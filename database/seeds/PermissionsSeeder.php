@@ -12,19 +12,57 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        $permission = new Permission;
-        $permission->name = "Gestionar Usuarios";
-        $permission->slug = "manage.users";
-        $permission->save();
-
+        /** USERS */
         $permission = new Permission;
         $permission->name = "Ver Usuarios";
-        $permission->slug = "show.users";
+        $permission->slug = "users.index";
         $permission->save();
 
         $permission = new Permission;
+        $permission->name = "Crear Usuarios";
+        $permission->slug = "users.store";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Editar Usuarios";
+        $permission->slug = "users.edit";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Eliminar Usuarios";
+        $permission->slug = "users.destroy";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Ver Usuario";
+        $permission->slug = "users.show";
+        $permission->save();
+
+
+        /** CLIENTS */
+        $permission = new Permission;
         $permission->name = "Ver Clientes";
-        $permission->slug = "show.clients";
+        $permission->slug = "clients.index";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Crear Clientes";
+        $permission->slug = "clients.store";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Editar Clientes";
+        $permission->slug = "clients.edit";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Eliminar Clientes";
+        $permission->slug = "clients.destroy";
+        $permission->save();
+
+        $permission = new Permission;
+        $permission->name = "Ver Cliente";
+        $permission->slug = "clients.show";
         $permission->save();
     }
 }

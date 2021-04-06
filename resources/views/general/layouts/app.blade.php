@@ -20,8 +20,13 @@
     <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/express.css') }}">
     <script src="{{ Asset('js/app.js') }}"></script>
 
+    <script src="{{ asset('vendor/sweetalert/sweetalert.all.js')  }}"></script>
+
     <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006288/BBBootstrap/choices.min.css?version=7.0.0">
+    <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006273/BBBootstrap/choices.min.js?version=7.0.0"></script>
 
     @yield('styles')
 </head>

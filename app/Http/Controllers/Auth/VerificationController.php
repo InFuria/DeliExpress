@@ -48,24 +48,37 @@ class VerificationController extends Controller
 
     /**
      * Mark the authenticated user's email address as verified.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function verify(Request $request)
     {
-        $user = User::find($request->route('id'));
+        try {
+            $user = User::find($request->route('id'));
 
-        if ($user->markEmailAsVerified())
-            event(new Verified($user));
+            if ($user->markEmailAsVerified())
+                event(new Verified($user));
 
-        if ($user->hasVerifiedEmail()) {
+            if ($user->hasVerifiedEmail()) {
 
-            Auth::login($user);
+                Auth::login($user);
 
-            Mail::to('eli_gimenez@outlook.com')->send(new Welcome($request));
+                if (isset($user->password) && $user->password != "")
+                {
+                    Mail::to($user->email)->send(new Welcome($request));
+                    return redirect($this->redirectPath())->with('verified', true)->with('toast_success', 'Su cuenta ha sido verificada');
+                }
 
-            return redirect($this->redirectPath())->with('verified', true)->with('toast_success', 'Su cuenta ha sido verificada');
+                Auth::logout();
+
+                // Se redirecciona al usuario a que ingrese su nueva contraseña
+                return ResetPasswordController::showFormToAssignPassword($user, 'Su cuenta ha sido verificada. Por favor defina una contraseña.');
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('VerificationController::verify - ' . $e->getMessage(), ['error_line' => $e->getLine()]);
+            return redirect()->back()->with('toast_error', 'Ha ocurrido un problema con la verificacion.');
         }
-
-        return redirect()->to('login')->with('toast_error', 'Ha ocurrido un problema con la verificacion.');
     }
 
 

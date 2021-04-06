@@ -33,6 +33,7 @@
             background-size: cover;
 
             height: 100%;
+            width: 100%;
             margin: 0 auto;
             display: table
         }
@@ -101,10 +102,10 @@
             font-size: 15px;
             line-height: 1.7;
             text-decoration: none !important;
-            padding: 6px;
+            padding: 15px 19px;
             background-color: #F55E50;
             color: white;
-            margin:0px;
+            margin:0;
         }
 
         .btn-verify:hover {
@@ -118,15 +119,14 @@
     <div class="row row-container justify-content-center">
         <div class="col-8 bg-white rounded px-0 mx-3">
             <div class="col-12 rounded-top bg-main m-0 d-flex" style="height: auto">
-                <img src="{{ Asset('assets/img/image5.png') }}" width="100px"
-                     style="margin-left: auto; margin-right: auto; display: block;">
+                <img src="{{ Asset('assets/img/image5.png') }}" width="100px" style="margin-left: auto; margin-right: auto; display: block;">
             </div>
+
             <table cellpadding="0" cellspacing="0" align="center" border="0"
                    style="font-size:0px; width:100%; background:#ffffff">
                 <tbody>
                 <tr>
                     <td style="text-align:center; vertical-align:top; direction:ltr; font-size:0px; padding:40px 50px">
-                        <h6>Bienvenido/a a DeliExpress</h6>
 
                         <div aria-labelledby="mj-column-per-100" class="x_mj-column-per-100 x_outlook-group-fix mt-3"
                              style="vertical-align:top; display:inline-block; direction:ltr; font-size:13px; text-align:left; width:100%">
@@ -141,8 +141,7 @@
                                 </tr>
                                 <tr>
                                     <td align="left">
-                                        <p style="font-size: 16px">¡Gracias por registrarte en DeliExpress! Antes que nada necesitamos confirmar tu cuenta,
-                                            por favor ingresa al siguiente link para verificar la solicitud y terminar el registro:</p>
+                                        <p style="font-size: 16px">Estamos enviando este email porque hemos recibido una solicitud de cambio de contraseña para su cuenta.</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -151,14 +150,21 @@
                                         <table align="center" border="0" style="border-collapse:separate">
                                             <tbody>
                                             <tr>
-                                                <td align="center" valign="middle" bgcolor="#F55E50" style="border:none; border-radius:3px; height: 100%; width: auto">
-                                                    <a class="btn-verify" href="{{ $url }}" style="width: auto">Verificar correo electrónico </a>
+                                                <td align="center" valign="middle" bgcolor="#F55E50" style="border:none; border-radius:3px;height: 100%; width: auto">
+                                                    <a style="width: auto" class="btn-verify" href="{{ $url }}">Actualizar contraseña</a>
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td align="left">
+                                        <p style="font-size: 16px">Este enlace de actualizacion expirara en 60 minutos.</p>
+                                        <p style="font-size: 16px">Si no solicito la actualizacion solo ignore este mensaje, o contacte con nuestro soporte si tiene alguna duda.</p>
+                                    </td>
+                                </tr>
+                                <tr>
                                 <tr>
                                     <td style="word-break:break-word; font-size:0px; padding:30px 0px"><p
                                             style="font-size:1px; margin:0px auto; border-top:1px solid #DCDDDE; width:100%"></p>
@@ -167,13 +173,7 @@
                                 <tr>
                                     <td align="left" style="font-size:0px; padding:0px">
                                         <div style="color:#747F8D; font-size:13px; line-height:16px; text-align:left">
-                                            <p>¿No llego el correo de confirmacion? <a
-                                                    href="{{ route('verification.resend') }}" style="color:#7289DA">
-                                                    Haz click en este enlace para enviar la verificacion nuevamente</a>
-                                            </p>
-
-<!--                                            TODO actualizar enviar email a soporte-->
-                                            <p>¿No solicitaste un registro en nuestra plataforma? <a
+                                            <p>¿Hubo algun inconveniente? <a
                                                     href="" style="color:#7289DA">
                                                     Ingresa aqui</a> para ponerte en contacto con nuestro equipo
                                             </p>

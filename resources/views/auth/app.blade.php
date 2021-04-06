@@ -29,7 +29,7 @@
         }
 
         .login-body {
-            background-image: url("../assets/img/background.jpg");
+            background-image: url("assets/img/background.jpg");
             background-color: #E5E5E5;
             background-position: center left;
             background-repeat: no-repeat;
@@ -111,6 +111,12 @@
             width : 200px;
             height : 141px;
             left : 141px;
+        }
+
+        .h6-extra-long {
+            width : 250px;
+            height : 141px;
+            left : 120px;
         }
 
         label, i {
