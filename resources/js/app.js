@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('selectize/dist/js/standalone/selectize');
 
 window.Vue = require('vue');
 

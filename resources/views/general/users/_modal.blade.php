@@ -3,7 +3,9 @@
     <div class="modal-dialog" role="document" style="max-width: 35%;">
         <div class="modal-content rounded">
             <div class="modal-header bg-orange-main d-flex justify-content-center" style="height: 64px;max-height: 64px;">
-                <h6 class="modal-title card-title" id="modalLabel" style="height: 100%">Nuevo usuario</h6>
+                <h6 class="modal-title card-title" id="modalLabel" style="height: 100%">
+                    Nuevo usuario
+                </h6>
             </div>
             <div class="modal-body" id="header">
                 <div class="d-flex align-items-stretch bg-white border-0 shadow-md rounded" style="height: 70px">
@@ -17,11 +19,11 @@
                     </button>
                 </div>
 
-                <form method="post" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                <form id="modalUserForm" method="post" action="" enctype="multipart/form-data">
                     @csrf
                     <div class="mt-4" id="generalGroup">
                         <div class="form-group" style="margin-top: 2rem;">
-                                <label class="label-primary-form" for="photo">Fotografia</label>
+                            <label class="label-primary-form" for="photo">Fotografia</label>
                             <div class="d-flex align-items-center border rounded shadow-sm" style="width: 264px; height: 92px;">
 
                                 <input type="file" class="d-block border-danger" id="photo" name="photo" alt="" style="position:absolute; height:92px; width: 264px; opacity: 0">
@@ -72,23 +74,17 @@
                     <div class="mt-4" id="securityGroup" style="display:none">
 
                         <div class="form-group" style="margin-top: 2rem;">
-                            <label class="label-primary-form" for="roles">Roles</label>
+                            <label class="label-primary-form" for="role">Rol</label>
                             <div style="width: 70%; height: 67px;">
-                                <select id="roles" name="roles[]" multiple="multiple" required>
-                                    @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                    @endforeach
+                                <select id="role" name="role" required>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group" style="margin-top: 2rem;">
                             <label class="label-primary-form" for="permissions">Permisos</label>
-                            <div style="width: 70%; height: 67px;">
+                            <div style="width: 70%; min-height: 67px;">
                                 <select id="permissions" name="permissions[]" multiple="multiple">
-                                    @foreach($permissions as $permission)
-                                        <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>

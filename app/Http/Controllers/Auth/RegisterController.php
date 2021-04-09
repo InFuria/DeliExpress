@@ -86,10 +86,9 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'is_store' => false
+            'is_store' => false,
+            'role_id' => Role::where('slug', 'new')->first()->id
         ]);
-
-        $user->roles()->sync(Role::where('slug', 'new')->first()->id);
 
         return $user;
     }

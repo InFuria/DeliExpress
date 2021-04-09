@@ -40,6 +40,27 @@
     <div class="main-content main-row">
         <nav class="navbar navbar-expand sticky-top" style="padding: 0; background-color: #F7F7F7">
             <h6 class="ml-3">@yield('title')</h6>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <div class="btn-group ml-auto mr-3 pl-2" id="profileGroup" style="border-left: 1px solid #E5E5E5;">
+                    <a href="{{ route('users.profile') }}"
+                       class="border-0 bg-transparent d-flex align-items-center">
+
+                        <p style="font-size: 15px; margin: 0; letter-spacing: 0.025rem; color: black">{{ explode(" ", auth()->user()->name)[0] }}</p>
+
+                        <img src="{{ asset("storage/users/" . auth()->user()->photo) }}" id="img-list"
+                             style="width: 35px; height: 35px; border-radius: 50%; font-size: 28px; display: flex;
+                                  align-items: center;justify-content: center; margin-left: 0.5rem;">
+                    </a>
+
+<!--                    Dropdown para futuras modificaciones-->
+<!--                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button">Mi Perfil</button>
+                        <button class="dropdown-item" type="button">Salir</button>
+                        <button class="dropdown-item" type="button">Mas opciones</button>
+                    </div>-->
+                </div>
+            </div>
         </nav>
 
         @yield('main')
@@ -49,8 +70,53 @@
 @yield('js')
 <script>
     $(document).ready(function (){
-        $('.menu-inactive').on('click', function(event){
-            /* logica de css para botones del menu */
+        /** Imagen del form **/
+        $('#photo').on('change', function () { //on file input change
+            if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+            {
+                var data = $(this)[0].files; //this file data
+
+                $.each(data, function (index, file) { //loop though each file
+                    var fRead = new FileReader(); //new filereader
+                    var ext = file.name.split('.').pop();
+                    var name = file.name;
+
+                    if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
+                        fRead.onload = (function (file) { //trigger function on successful read
+                            return function (e) {
+
+                                $('#img-span').remove();
+
+                                var appendImg = $('<img id="img-span" class="mx-4" src="' + e.target.result + '" style="width: 64px; height: 64px; border-radius: 50%;' +
+                                    ' display: flex; align-items: center;justify-content: center;">'); //create image element
+
+
+                                $(appendImg).insertAfter($('#photo')); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+
+                    } else {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: true,
+                            confirmButtonColor: '#FD4F00',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                        Toast.fire({
+                            icon: 'error',
+                            html: '&nbsp;&nbsp;El archivo no es valido para el navegador'
+                        })
+                    }
+                });
+
+            }
         });
     });
 </script>

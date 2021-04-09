@@ -24,12 +24,14 @@ Route::group(['namespace' => 'General', 'middleware' => ['auth', 'verified']], f
     Route::get('/', 'DashboardController@index')->name('home');
 
 
-    Route::resource('users', 'UserController');
-    Route::get('users/profile','UserController@profile')->name('users.profile'); // solo para ver el perfil propio
-    Route::get('users/status/{user}','UserController@status')->name('users.status'); // para cambiar el status de cualquier usuario
+    Route::get('users/profile','UserController@profile')->name('users.profile');
+    Route::resource('users', 'UserController')->except('edit');
+    Route::get('users/status/{user}','UserController@status')->name('users.status');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
+
+    Route::resource('delivery', 'DeliveryController');
 
 
         /*

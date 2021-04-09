@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Http\Traits\HasPermissionsTrait;
+use App\Notifications\CustomResetPassword;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\VerifyEmail;
@@ -11,7 +13,7 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
 {
     use Notifiable, HasPermissionsTrait;
 
-    protected $fillable = ['name', 'username', 'phone','img', 'status', 'is_store', 'email', 'password'];
+    protected $fillable = ['name', 'username', 'phone','photo', 'status', 'is_store', 'role_id', 'email', 'password'];
     protected $hidden = ['password', 'remember_token'];
     protected $casts = ['email_verified_at' => 'datetime'];
 
@@ -23,39 +25,6 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
         });
     }
 
-
-    /** Roles Manage */
-    /*public function authorizeRoles($roles)
-    {
-        abort_unless($this->hasAnyRole($roles), 401);
-        return true;
-    }
-
-    public function hasAnyRole($roles)
-    {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
-                    return true;
-                }
-            }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function hasRole($role)
-    {
-        if ($this->roles()->where('name', $role)->first()) {
-            return true;
-        }
-        return false;
-    }*/
-
-
     /**
      * Send the email verification notification.
      *
@@ -66,4 +35,26 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
         $this->notify(new VerifyEmail);
     }
 
+    /**
+     * Send the reset email notification.
+     *
+     * @param $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPassword($token));
+    }
+
+
+    /** Relationships */
+    public function store(){
+
+        return $this->hasOne(Store::class);
+    }
+
+    public function delivery(){
+
+        return $this->hasOne(Delivery::class,'user_id');
+    }
 }

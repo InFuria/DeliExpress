@@ -8,10 +8,11 @@ use App\Role;
 trait HasPermissionsTrait
 {
 
-    public function roles()
+    public function role()
     {
 
-        return $this->belongsToMany(Role::class, 'role_user');
+        return $this->belongsTo(Role::class);
+        /*return $this->belongsToMany(Role::class, 'role_user');*/
 
     }
 
@@ -61,25 +62,37 @@ trait HasPermissionsTrait
     public function hasPermissionThroughRole($permission)
     {
 
-        foreach ($this->roles as $role) {
+        if ($this->role->permissions->contains('slug', $permission)) {
+            return true;
+        }
+
+        return false;
+
+        /*foreach ($this->roles as $role) {
             if ($role->permissions->contains('slug', $permission)) {
                 return true;
             }
         }
-        return false;
+        return false;*/
     }
 
     public function hasRole($role)
     {
 
-        if ($this->roles->contains('slug', $role)) {
+        if ($this->role->slug == $role) {
             return true;
         }
 
         return false;
+
+        /*if ($this->roles->contains('slug', $role)) {
+            return true;
+        }
+
+        return false;*/
     }
 
-    public function hasRoles($roles)
+    /*public function hasRoles($roles)
     {
 
         foreach ($roles as $role) {
@@ -88,7 +101,7 @@ trait HasPermissionsTrait
             }
         }
         return false;
-    }
+    }*/
 
     public function hasPermission($permission)
     {

@@ -31,10 +31,6 @@ class PermissionsServiceProvider extends ServiceProvider
             return auth()->check() && auth()->user()->hasRole($role);
         });
 
-        Blade::if('roles', function ($roles) {
-            return auth()->check() && auth()->user()->hasRoles($roles);
-        });
-
         Blade::if('permission', function ($permission) {
             return auth()->check() && auth()->user()->hasPermissionTo($permission);
         });
@@ -43,15 +39,5 @@ class PermissionsServiceProvider extends ServiceProvider
             return auth()->check() && auth()->user()->hasPermissions($permissions);
         });
 
-        try {
-            Permission::get()->map(function ($permission) {
-                Gate::define($permission->slug, function ($user) use ($permission) {
-                    return $user->hasPermissionTo($permission);
-                });
-            });
-        } catch (\Exception $e) {
-            \Log::error('PermissionsServiceProvider - ' . $e->getMessage(), ['error_line' => $e->getLine()]);
-            return false;
-        }
     }
 }
