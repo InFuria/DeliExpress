@@ -15,7 +15,7 @@ class CreateDeliveryUserTable extends Migration
     {
         Schema::create('delivery_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('user_id');
+            $table->bigInteger('user_id');
             $table->string('code');
             $table->string('lat');
             $table->string('lng');

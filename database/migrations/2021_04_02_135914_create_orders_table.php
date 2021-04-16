@@ -13,11 +13,17 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
+        Schema::create('order_statuses', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+        });
 
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code');
             $table->string('description');
+            $table->bigInteger('status');
+            $table->foreign('status')->references('id')->on('order_statuses')->onUpdate('cascade');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->bigInteger('client_id')->unsigned();
