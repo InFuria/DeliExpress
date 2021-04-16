@@ -168,7 +168,7 @@
                                     <td align="left" style="font-size:0px; padding:0px">
                                         <div style="color:#747F8D; font-size:13px; line-height:16px; text-align:left">
                                             <p>¿No llego el correo de confirmacion? <a
-                                                    href="{{ route('verification.resend') }}" style="color:#7289DA">
+                                                    href="{{ route('verification.resend.id', ['id' => $user->id]) }}" style="color:#7289DA">
                                                     Haz click en este enlace para enviar la verificacion nuevamente</a>
                                             </p>
 

@@ -43,7 +43,7 @@ class VerificationController extends Controller
     {
         //$this->middleware('auth');
         $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $this->middleware('throttle:6,1')->only('verify');
     }
 
     /**
@@ -82,9 +82,22 @@ class VerificationController extends Controller
     }
 
 
+    /**
+     * Resend the email verification notification.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function resend(Request $request)
+    {
+        $user = User::find($request->route('id'));
 
+        if ($user->hasVerifiedEmail()) {
+            return redirect($this->redirectPath());
+        }
 
+        $user->sendEmailVerificationNotification();
 
-
-
+        return back()->with('resent', true);
+    }
 }
