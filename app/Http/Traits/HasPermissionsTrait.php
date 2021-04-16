@@ -92,16 +92,15 @@ trait HasPermissionsTrait
         return false;*/
     }
 
-    /*public function hasRoles($roles)
+    public function hasAnyRole($roles)
     {
-
         foreach ($roles as $role) {
-            if ($this->roles->contains('slug', $role)) {
+            if ($this->role->slug === $role) {
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
     public function hasPermission($permission)
     {

@@ -1,4 +1,4 @@
-<div class="col-12 p-0 shadow-md" style="height: 30%;">
+<div class="col-12 p-0 shadow-e-sm" style="height: 34%;">
     <button type="button" id="closeBtn" class="pull-right" onclick="closePanel()">
         <span class="material-icons">close</span>
     </button>
@@ -46,8 +46,12 @@
     </div>
 </div>
 
-<div class="d-flex align-items-end flex-column col-12 m-0 p-0" style="max-height: 10%; height: 10%;">
-    <button class="btn-out-primary btn-out-extra mt-2" id="editUser" data-toggle="modal" data-target="#exampleModal">
+<div class="d-flex d-inline justify-content-end col-12 m-0 p-0" style="max-height: 10%; height: 10%;">
+    <a href="" class="btn-out-primary btn-out-extra" id="resend" style="margin-right: 20px;">
+        Reenviar verificacion
+    </a>
+
+    <button class="btn-out-primary btn-out-extra" id="editUser" data-toggle="modal" data-target="#exampleModal" style="margin-right: 20px;">
         Editar Usuario
     </button>
 </div>

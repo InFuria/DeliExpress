@@ -18,12 +18,12 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
     protected $casts = ['email_verified_at' => 'datetime'];
 
     /** Boot */
-    public static function boot() {
+    /*public static function boot() {
         parent::boot();
         static::creating(function (User $user) {
             $user->status = 1;
         });
-    }
+    }*/
 
     /**
      * Send the email verification notification.

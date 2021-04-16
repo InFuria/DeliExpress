@@ -2,7 +2,7 @@
 
 use App\Mail\Welcome;
 use App\Permission;
-use App\StoreCategory;
+use App\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
@@ -68,11 +68,6 @@ class UserController extends Controller {
         }
     }
 
-    public function create()
-    {
-        /** This view is include in the index */
-    }
-
     public function store(UserRequest $request)
     {
         try {
@@ -85,6 +80,7 @@ class UserController extends Controller {
                 'username' => $request->username,
                 'phone' => $request->phone,
                 'photo' => '',
+                'status' => $request->status,
                 'is_store' => false,
                 'role_id' => $request->role,
                 'email' => $request->email,
@@ -136,7 +132,7 @@ class UserController extends Controller {
     public function update(UserRequest $request, User $user)
     {
         try {
-            if (! $this->user->hasPermissionTo('users.edit')){
+            if (! $this->user->hasPermissionTo('users.update')){
                 return redirect()->back()->with('toast_error', 'No posee permisos suficientes para acceder a esta seccion.');
             }
 
@@ -147,6 +143,7 @@ class UserController extends Controller {
             $user->update([
                 'name' => $request->name,
                 'username' => $request->username,
+                'status' => $request->status,
                 'phone' => $request->phone,
                 'role_id' => $request->role,
                 'email' => $request->email
@@ -188,7 +185,7 @@ class UserController extends Controller {
             $user->roles()->sync([]);
             $user->delete();
 
-            return response()->json(['message' => "Se ha elimiado al usuario!"]);
+            return response()->json(['message' => "Se ha eliminado al usuario!"]);
 
         } catch (\Exception $e) {
             \Log::error('General\UserController::destroy - ' . $e->getMessage(), ['error_line' => $e->getLine()]);

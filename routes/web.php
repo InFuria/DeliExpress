@@ -16,6 +16,8 @@ Route::get('test', function (){
 });
 
 Auth::routes(['verify' => true]);
+Route::get('email/resend/{id}', 'Auth\VerificationController@resend')->name('verification.resend.id');
+
 Route::get('logout', 'Auth\LoginController@logout')->name('direct-logout');
 Route::post('password/assign/{user}', 'Auth\ResetPasswordController@assignPassword')->name('password.assign');
 
@@ -32,6 +34,7 @@ Route::group(['namespace' => 'General', 'middleware' => ['auth', 'verified']], f
     Route::resource('permissions', 'PermissionController');
 
     Route::resource('delivery', 'DeliveryController');
+    Route::resource('stores', 'StoreController');
 
 
         /*

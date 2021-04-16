@@ -9,10 +9,13 @@
             color: white;
         }
 
-        .selectize-control.multi .selectize-input > div, .selectize-input span {
+        .selectize-control.multi .selectize-input > div, .selectize-input span, .selectize-control.single .selectize-input > div {
             font-family: 'Mulish';
             border: 1px solid #FF7334;
             border-radius: 4px;
+
+            padding: 2px 6px;
+
             background-color: white;
             color: #FF7334 !important;
         }
@@ -110,12 +113,12 @@
 @section('main')
 
     <div style="display: flex">
-        <nav class="card rounded shadow-sm border-0 ml-3" style="height: 50px; max-width: 98%;">
+        <nav class="card rounded shadow-e-sm border-0 ml-3" style="height: 50px; max-width: 98%;">
             @yield('breadcrumb')
         </nav>
     </div>
 
-    <main class="container bg-white shadow-sm border-0 mt-3 ml-3"
+    <main class="container bg-white shadow-e-sm border-0 mt-3 ml-3"
           style="height: auto; max-height: 100%; max-width: 98%; width: 98% !important; margin-bottom: 15px; display: inline-flex">
         @include('sweetalert::alert')
 
@@ -131,12 +134,19 @@
 
                         <div class="form-group" style="margin-top: 2rem;">
                             <label class="label-primary-form" for="photo">Fotografia</label>
-                            <div class="d-flex align-items-center border rounded shadow-sm" style="width: 264px; height: 92px;">
+                            <div class="d-flex align-items-center border rounded shadow-e-sm" style="width: 264px; height: 92px;">
 
                                 <input type="file" class="d-block border-danger" id="photo" name="photo" alt="" style="position:absolute; height:92px; width: 264px; opacity: 0">
 
-                                <img id="img-span" alt="" class="mx-4" src="{{ asset('storage/users/' . $user->photo) }}"
-                                     style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;justify-content: center;">
+                                @if($user->photo != "")
+                                    <img id="img-span" alt="" class="mx-4" src="{{ asset('storage/users/' . $user->photo) }}"
+                                         style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;justify-content: center;">
+                                @else
+                                    <span id="img-span" class="mx-4 material-icons"
+                                         style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;justify-content: center;">
+                                        person
+                                    </span>
+                                @endif
 
                                 <div class="d-flex flex-column mt-1">
                                     <label class="label-text-form">Subir imagen</label>
@@ -185,7 +195,7 @@
                         </div>
 
                         <div class="form-group" style="margin-top: 2rem; height: 55%; overflow-y: scroll;overflow-x: hidden;">
-                            <label class="label-primary-form" for="permissions">Permisos</label>
+                            <label class="label-primary-form" for="permissions">Permisos extra</label>
                             <br>
                             <div style="display: inline-flex;" id="permissionsSpn">
                                 @foreach($user->permissions as $item)
@@ -202,7 +212,13 @@
                 </div>
             </form>
 
-            @yield('extra')
+            @anyRole(['delivery'])
+                @include('general.users.profiles.delivery')
+            @endanyRole
+
+            @anyRole(['store'])
+                @include('general.users.profiles.store')
+            @endanyRole
         </div>
     </main>
 @endsection
@@ -210,7 +226,70 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            //
+            /** Selects **/
+            $(function () {
+
+                /** Delivery **/
+                $('#enabled').selectize({
+                    persist: false,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    create: false,
+                    options: [{name: 'Habilitado',id: 1},{name: 'No Habilitado',id: 2}]
+                });
+
+                $('#available').selectize({
+                    persist: false,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    create: false,
+                    options: [{name: 'Disponible',id: 1},{name: 'Ocupado',id: 2}]
+                });
+
+
+                /** Stores **/
+                $('#category').selectize({
+                    plugins: ['remove_button'],
+                    persist: false,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    create: false,
+                    options: [{name: 'Comida Mexicana',id: 1},{name: 'Farmacia',id: 2}]{{--{!! json_encode($categories) !!}--}}
+                });
+
+                $('#department').selectize({
+                    plugins: ['remove_button'],
+                    persist: false,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    create: false,
+                    options: [{name: 'Central',id: 1},{name: 'Alto Parana',id: 2}]{{--{!! json_encode($departments) !!}--}},
+                });
+
+                $('#municipality').selectize({
+                    plugins: ['remove_button'],
+                    persist: false,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    create: false,
+                    options: [{name: 'Municipio 1',id: 1},{name: 'Municipio 2',id: 2}]{{--{!! json_encode($municipalities) !!}--}},
+                });
+
+                $('#zone').selectize({
+                    plugins: ['remove_button'],
+                    persist: false,
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: ['name'],
+                    create: false,
+                    options: [{name: 'Santa Ana',id: 1},{name: 'Centro',id: 2}]{{--{!! json_encode($zones) !!}--}},
+                });
+            });
         })
     </script>
 @append
