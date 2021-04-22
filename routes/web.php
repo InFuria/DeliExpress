@@ -23,25 +23,40 @@ Route::post('password/assign/{user}', 'Auth\ResetPasswordController@assignPasswo
 
 Route::group(['namespace' => 'General', 'middleware' => ['auth', 'verified']], function() {
 
+    // Rutas para breadcrumb
     Route::get('/', 'DashboardController@index')->name('home');
+    Route::get('home', 'DashboardController@index');
 
 
     Route::get('users/profile','UserController@profile')->name('users.profile');
-    Route::resource('users', 'UserController')->except('edit');
+    Route::resource('users', 'UserController')->except(['create', 'edit']);
     Route::get('users/status/{user}','UserController@status')->name('users.status');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
 
     Route::resource('delivery', 'DeliveryController');
-    Route::resource('stores', 'StoreController');
+    Route::resource('stores', 'StoreController')->except(['create', 'edit']);
+
+    Route::resource('categories/products', 'ProductCategoryController', ['as' => 'categories'])->only(['store', 'update', 'destroy']);
+
+    // No aplicar resource, los nombres no se ajustan bien
+    Route::get('categories/products/sub/{productCategory}', 'SubCategoryController@listWithProducts')->name('sub.categories.withProducts');
+    Route::post('categories/products/sub/{subCategory}', 'SubCategoryController@store')->name('sub.categories.store');
+    Route::patch('categories/products/sub/{subCategory}', 'SubCategoryController@update')->name('sub.categories.update');
+    Route::delete('categories/products/sub/{subCategory}', 'SubCategoryController@destroy')->name('sub.categories.destroy');
+
+    Route::resource('products', 'ProductController')->except(['create', 'edit']);
+    Route::get('products/bySubCategory/{subCategory}', 'ProductController@bySubCategory')->name('products.by.sub.categories');
+
+    Route::resource('orders', 'OrderController');
 
 
-        /*
-        |--------------------------------------
-        |Menu Category
-        |--------------------------------------
-        */
+    /*
+    |--------------------------------------
+    |Menu Category
+    |--------------------------------------
+    */
         /*Route::resource('category','CategoryController');
         Route::get('category/delete/{id}','CategoryController@delete');
         Route::get('category/status/{id}','CategoryController@status');*/

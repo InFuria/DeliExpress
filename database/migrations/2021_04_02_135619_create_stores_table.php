@@ -23,7 +23,7 @@ class CreateStoresTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('department_id')->unsigned();
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
@@ -31,7 +31,7 @@ class CreateStoresTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('municipality_id')->unsigned();
-            $table->foreign('municipality_id')->references('id')->on('municipalities')->onUpdate('cascade');
+            $table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
@@ -68,16 +68,16 @@ class CreateStoresTable extends Migration
         Schema::create('category_store', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('store_id')->unsigned();
-            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
         Schema::create('rates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('store_id')->unsigned();
-            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('client_id');
             $table->integer('value');
             $table->string('comment');
