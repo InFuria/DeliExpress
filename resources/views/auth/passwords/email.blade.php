@@ -2,6 +2,10 @@
 
 @section('styles')
     <style>
+        .login-body {
+            background-image: url("../../assets/img/background.jpg") !important;
+        }
+
         .recovery-title {
             position: absolute;
             width: 281px;

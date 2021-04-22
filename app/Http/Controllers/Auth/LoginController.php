@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Stripe\Checkout\Session;
 
@@ -48,5 +49,20 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         return redirect()->back()->with('toast_error', 'Credenciales incorrectas!');
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->status == 0){
+            Auth::logout();
+            return redirect()->to('login')->with('toast_error', 'Este usuario se encuentra deshabilitado, por favor contacte a soporte');
+        }
     }
 }

@@ -23,14 +23,15 @@ class CreateStoresTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('department_id')->unsigned();
-            $table->foreign('department_id')->references('id')->on('departments')->onUpdate('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
-        Schema::create('zone', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->bigInteger('municipality_id')->unsigned();
-            $table->foreign('municipality_id')->references('id')->on('municipalities')->onUpdate('cascade');
+            $table->foreign('municipality_id')->references('id')->on('municipalities')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
@@ -41,34 +42,42 @@ class CreateStoresTable extends Migration
             $table->string('long_name');
             $table->string('short_name');
             $table->string('description');
-            $table->string('direction');
+            $table->string('address');
             $table->string('phone');
             $table->string('mobile');
             $table->string('email');
             $table->string('logo');
             $table->string('cover');
             $table->double('rate_avg', 10, 2);
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('store_categories')->onUpdate('cascade');
             $table->bigInteger('department_id');
             $table->bigInteger('municipality_id');
             $table->bigInteger('zone_id');
             $table->timestamps();
         });
 
+        // Categorias de tipos de negocios
+        Schema::create('categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('img');
+            $table->boolean('status');
+            $table->timestamps();
+        });
+
+        // Pivot de negocios con multiples categorias
         Schema::create('category_store', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('store_id')->unsigned();
-            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('store_categories')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
         Schema::create('rates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('store_id')->unsigned();
-            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('client_id');
             $table->integer('value');
             $table->string('comment');

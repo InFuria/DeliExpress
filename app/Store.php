@@ -3,19 +3,36 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use App\Notifications\VerifyEmail;
 
-class Store extends Authenticatable
+class Store extends Model
 {
-    use Notifiable;
 
-    protected $guard = 'store';
     protected $table = 'stores';
 
-    private $username;
-    private $password;
+    protected $fillable = ['user_id', 'long_name', 'short_name', 'description', 'address', 'phone', 'mobile', 'email',
+        'logo', 'cover', 'rate_avg', 'department_id', 'municipality_id', 'zone_id'];
 
-    protected $fillable = ['email', 'password'];
+    /** Relationships */
+    public function user(){
+
+        return $this->belongsTo(Store::class);
+    }
+
+    public function categories(){
+
+        return $this->belongsToMany(Category::class, 'category_store', 'store_id', 'category_id')->withTimestamps();
+    }
+
+    public function productCategories(){
+
+        return $this->hasMany(ProductCategory::class);
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

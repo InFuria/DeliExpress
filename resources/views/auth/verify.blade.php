@@ -92,16 +92,23 @@
         }
 
         .btn-verify {
+            display: block;
+            height:100%;
+            width:100%;
+
             text-align: center;
-            width: 200px;
             left: auto;
             font-size: 15px;
             line-height: 1.7;
-            text-decoration: none;
+            text-decoration: none !important;
             padding: 6px;
             background-color: #F55E50;
             color: white;
             margin:0px;
+        }
+
+        .btn-verify:hover {
+            color: white;
         }
     </style>
 </head>
@@ -144,8 +151,8 @@
                                         <table align="center" border="0" style="border-collapse:separate">
                                             <tbody>
                                             <tr>
-                                                <td align="center" valign="middle" bgcolor="#F55E50" style="border:none; border-radius:3px; padding:15px 19px">
-                                                    <a class="btn-verify" href="{{ $url }}">Verificar correo electrónico </a>
+                                                <td align="center" valign="middle" bgcolor="#F55E50" style="border:none; border-radius:3px; height: 100%; width: auto">
+                                                    <a class="btn-verify" href="{{ $url }}" style="width: auto">Verificar correo electrónico </a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -161,7 +168,7 @@
                                     <td align="left" style="font-size:0px; padding:0px">
                                         <div style="color:#747F8D; font-size:13px; line-height:16px; text-align:left">
                                             <p>¿No llego el correo de confirmacion? <a
-                                                    href="{{ route('verification.resend') }}" style="color:#7289DA">
+                                                    href="{{ route('verification.resend.id', ['id' => $user->id]) }}" style="color:#7289DA">
                                                     Haz click en este enlace para enviar la verificacion nuevamente</a>
                                             </p>
 

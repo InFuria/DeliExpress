@@ -167,10 +167,10 @@
                                                border="0" style="border-collapse:separate">
                                             <tbody>
                                             <tr>
-                                                <td align="center" valign="middle" bgcolor="#F55E50" style="border:none; border-radius:3px; padding:15px 12px">
+                                                <td align="center" valign="middle" bgcolor="#F55E50" style="border:none; border-radius:3px; padding:15px 12px; height: 100%; width: auto">
                                                     <a class="btn-verify d-flex justify-content-center" href="{{ route('login') }}">
                                                         <i class="material-icons mr-3" style="color: white !important;">login</i>
-                                                        Iniciar Sesion</a>
+                                                        Ingresar</a>
                                                 </td>
                                             </tr>
                                             </tbody>

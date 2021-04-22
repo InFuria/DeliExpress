@@ -8,6 +8,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -53,11 +54,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $messages = [
-            'password.required' => 'El campo de contraseña es obligatorio.',
+            'password.required' => 'La contraseña es obligatoria.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
             'email.required'    => 'El campo email es obligatorio.',
             'email.unique'      => 'El email ingresado ya esta registrado.',
-            'name.required'     => 'El campo de nombre es obligatorio.'
+            'name.required'     => 'El campo de nombre es obligatorio.',
+            'username.required' => 'El nombre de usuario es obligatorio.',
+            'username.unique'   => 'El nombre de usuario ya esta en uso.',
+            'password.min'      => 'La contraseña debe tener como minimo 6 caracteres.'
+
         ];
 
         return Validator::make($data, [
@@ -81,10 +86,9 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'is_store' => false
+            'is_store' => false,
+            'role_id' => Role::where('slug', 'new')->first()->id
         ]);
-
-        $user->roles()->sync(Role::where('slug', 'new')->first()->id);
 
         return $user;
     }
@@ -100,7 +104,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        //$this->guard()->login($user);
+        $this->guard()->login($user);
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
@@ -115,6 +119,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
+        Auth::logout();
         return redirect()->to('/login')->with('toast_success', 'Se ha registrado exitosamente!');
     }
 }

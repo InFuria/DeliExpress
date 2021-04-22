@@ -13,7 +13,7 @@ class RolesSeeder extends Seeder
     public function run()
     {
         $role = new Role;
-        $role->name = "Usuarios Nuevos";
+        $role->name = "Usuario Nuevo";
         $role->slug = "new";
         $role->save();
 
@@ -33,7 +33,7 @@ class RolesSeeder extends Seeder
         $role->save();
 
         $role = new Role;
-        $role->name = "Negocios";
+        $role->name = "Negocio";
         $role->slug = "store";
         $role->save();
 

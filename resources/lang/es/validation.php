@@ -36,7 +36,7 @@ return [
     'different'            => 'The :attribute and :other must be different.',
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
-    'dimensions'           => 'The :attribute has invalid image dimensions.',
+    'dimensions'           => 'El :attribute no tiene dimensiones validas.',
     'distinct'             => 'The :attribute field has a duplicate value.',
     'email'                => 'The :attribute must be a valid email address.',
     'exists'               => 'The selected :attribute is invalid.',
@@ -68,7 +68,7 @@ return [
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field is required.',
+    'required'             => 'El campo :attribute es obligatorio.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
@@ -82,9 +82,9 @@ return [
         'string'  => 'The :attribute must be :size characters.',
         'array'   => 'The :attribute must contain :size items.',
     ],
-    'string'               => 'The :attribute must be a string.',
-    'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
+    'string'               => 'El campo :attribute debe ser un texto.',
+    'timezone'             => 'La zona horaria del campo :attribute no es valida.',
+    'unique'               => 'El valor del campo :attribute ya esta en uso.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
@@ -106,7 +106,30 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'rule-name'         => 'custom-message',
+            'name'              => 'nombre',
+            'username'          => 'nombre de usuario',
+            'cover'             => 'portada',
+            'logo'              => 'logo',
+            'photo'             => 'foto',
+            'password'          => 'contraseña',
+            'department_id'     => 'departamento',
+            'municipality_id'   => 'municipalidad',
+            'zone_id'           => 'zona',
+            'long_name'         => 'nombre largo',
+            'short_name'        => 'nombre corto',
+            'description'       => 'descripcion',
+            'address'           => 'direccion',
+            'phone'             => 'telefono',
+            'mobile'            => 'telefono celular',
+            'categories'        => 'categorias',
+            'admin_image' => [
+                'dimensions' => [
+                    'max_width' => 'El archivo :attribute debe tener como maximo :max_width px',
+                    'max_height' => 'El archivo :attribute debe tener como maximo :max_width px'
+                ]
+            ]
+
         ],
     ],
 
