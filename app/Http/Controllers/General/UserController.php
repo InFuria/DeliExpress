@@ -116,7 +116,7 @@ class UserController extends Controller {
     {
         try {
             if (! $this->user->hasPermissionTo('users.show')){
-                return redirect()->back()->with('toast_error', 'No posee permisos suficientes para acceder a esta seccion.');
+                return response()->json(['message' => 'No posee permisos suficientes para usar esta funcionalidad.'], 403);
             }
 
             $user = User::where('id', $user)->with('role', 'permissions')->first();
@@ -178,7 +178,7 @@ class UserController extends Controller {
     {
         try {
             if (! $this->user->hasPermissionTo('users.destroy')){
-                return redirect()->back()->with('toast_error', 'No posee permisos suficientes para acceder a esta seccion.');
+                return response()->json(['message' => 'No posee permisos suficientes para usar esta funcionalidad.'], 403);
             }
 
             $user->permissions()->sync([]);
