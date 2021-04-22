@@ -13,7 +13,7 @@ class InitialSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = Permission::where('slug', 'like', '%users.%')->orWhere('slug', 'like', '%clients.%')->pluck('id');
+        $permissions = Permission::pluck('id');
         $role = Role::where('slug', 'admin')->first();
         $role->permissions()->sync($permissions);
 
