@@ -6,11 +6,7 @@
     <style>
 
         .users-list:hover {
-            background-color: #FF7334 !important;
-        }
-
-        .users-list:hover .searchBottomLbl {
-            color: white !important;
+            background-color: rgba(253, 79, 0, 0.1) !important;
         }
 
         .right-panel-empty {
@@ -36,9 +32,7 @@
 @section('main')
 
     <div style="display: flex">
-        <nav class="card rounded shadow-e-sm border-0 ml-3" style="height: 50px; max-width: 82%; width: 82%">
-            @yield('breadcrumb')
-        </nav>
+        {{ Breadcrumbs::render('users-end') }}
 
         @permission('users.store')
         <a type="button" id="createUser" data-toggle="modal" data-target="#exampleModal"
@@ -79,7 +73,7 @@
                                 style="width: 100%; height: 80px; cursor: pointer" value="{{ $user->id }}"
                                 onclick="getUserData(this)">
 
-                            <img src="{{ $user->photo != "" ? asset("storage/users/" . $user->photo) : asset("storage/users/person.png") }}" id="img-list"
+                            <img src="{{ $user->photo != "" ? asset("storage/users/" . $user->photo) : asset("storage/noimage.jpg") }}" id="img-list"
                                  style="width: 50px; height: 50px; border-radius: 50%; font-size: 28px; display: flex;
                                  align-items: center;justify-content: center; margin-left: 0.5rem; margin-right: 1.5rem;">
 
@@ -98,11 +92,11 @@
         </div>
 
         @permission('users.show')
-        <div id="right-panel" class="border rounded right-panel-content" style="display: none; padding-bottom: 20px">
+        <div id="right-panel" class="border rounded right-panel-content active-panel" style="display: none; padding-bottom: 20px">
             @include('general.users._show')
         </div>
 
-        <div id="right-panel-empty" class="rounded right-panel-empty">
+        <div id="right-panel-empty" class="rounded right-panel-empty inactive-panel">
             <div style="max-width: 220px; text-align: center; transform: translateZ(50px)">
                 <span class="material-icons" style="font-size: 70px; color: #E5E5E5">chrome_reader_mode</span>
                 <label style="color: #979797; font-size: 16px; text-align: center; width: 170px">
@@ -111,7 +105,7 @@
             </div>
         </div>
         @else
-            <div id="right-panel-locked" class="rounded right-panel-empty">
+            <div id="right-panel-locked" class="rounded right-panel-empty inactive-panel">
                 <div style="max-width: 220px; text-align: center; transform: translateZ(50px)">
                     <span class="material-icons" style="font-size: 70px; color: #E5E5E5">no_accounts</span>
                     <label style="color: #979797; font-size: 16px; text-align: center">
@@ -183,12 +177,6 @@
             $('#search').keyup(function (e) {
                 e.preventDefault();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-
                 $.ajax({
                     url: "{{ url('users') }}",
                     method: 'get',
@@ -205,7 +193,7 @@
 
                             $.each(result.users.slice(0,6), function (key, value) {
 
-                                let photo = value.photo !== "" ? "storage/users/" + value.photo : "storage/users/person.png";
+                                let photo = value.photo !== "" ? "storage/users/" + value.photo : "storage/noimage.jpg";
 
                                 recent.append(
                                     '<button id="userBtn" class="users-list d-flex align-items-center border-0 bg-white rounded" ' +
@@ -244,13 +232,15 @@
 
         /** Limpieza de form al pasar de editar a crear **/
         $('#createUser').on('click', function (){
+            resetHeaders();
+
             let modalForm = $('#modalUserForm');
             modalForm.attr('action', "{{ route('users.store') }}").trigger('reset');
             modalForm.find('input[name="_method"]').remove();
             modalForm.find('.modal-title').val('Nuevo usuario');
 
             var $select = $('#status').selectize();
-            $select[0].selectize.clear();
+            $select[0].selectize.setValue(1);
 
             var $select = $('#role').selectize();
             $select[0].selectize.clear();
@@ -258,21 +248,23 @@
             var $select = $('#permissions').selectize();
             $select[0].selectize.clear();
 
-            $('#img-span').replaceWith('<span id="img-span" class="material-icons material-icons mx-4"'+
+            $('#img-span').remove()
+            $('<span id="img-span" class="material-icons material-icons mx-4"'+
                 'style="background: rgba(229, 229, 229, 1); width: 64px; height: 64px; border-radius: 50%; font-size: 28px; display: flex;'+
                 'align-items: center;justify-content: center; color: white">'+
                 'cloud_upload</span>'
-            );
+            ).insertAfter($('#photo'));
 
         })
 
         /** Detalles de usuario **/
         function getUserData(button) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
+
+            let element = $(button);
+            if (element.hasClass('e-active') === false)
+                element.addClass('e-active')
+
+            $('.users-list').not(element).removeClass('e-active')
 
             @permission('users.update')
             let userId = $(button).val();
@@ -287,10 +279,10 @@
 
                     $('#roleSpn').text(result.user.role.name);
 
-                    if (result.user.photo !== ''){
+                    if (result.user.photo !== '' && result.user.photo !== null){
                         $('#userImg').attr('src', "{{ asset('/storage/users') }}/" + result.user.photo);
                     } else {
-                        $('#userImg').attr('src', "{{ asset('/storage/users/person.png') }}");
+                        $('#userImg').attr('src', "{{ asset('/storage/noimage.jpg') }}");
                     }
 
 
@@ -338,10 +330,11 @@
                     let route = '{{ route("verification.resend.id", ":id") }}';
                     route = route.replace(':id', result.user.id);
                     $('#resend').attr("href", route);
-                    console.log(route);
 
                     let userModal = $('#exampleModal');
                     $('#editUser').on('click', function (){
+
+                        resetHeaders()
 
                         if (userModal.find('input[name="_method"]').length === 0){
                             userModal.find('form').prepend('<input type="hidden" name="_method" value="patch">');
@@ -358,12 +351,20 @@
 
                         userModal.find('#img-span').remove()
 
-                        if(user.photo === '')
-                            user.photo = 'person.png';
+                        let route = '{{ asset("storage/users") }}/' + user.photo;
 
-                        $('<img id="img-span" class="mx-4" src="{{ asset("storage/users") }}/' + user.photo + '" style="width: 64px; height: 64px; border-radius: 50%;' +
-                            ' display: flex; align-items: center;justify-content: center;">')
-                            .insertAfter($('#photo'))
+                        let img;
+                        if(user.photo === '' || user.photo === null){
+                            img = $('<span id="img-span" class="material-icons material-icons mx-4"'+
+                                'style="background: rgba(229, 229, 229, 1); width: 64px; height: 64px; border-radius: 50%; font-size: 28px; display: flex;'+
+                                'align-items: center;justify-content: center; color: white">'+
+                                'cloud_upload</span>');
+                        } else{
+                            img = $('<img id="img-span" class="mx-4" src="' + route + '" style="width: 64px; height: 64px; border-radius: 50%;' +
+                                ' display: flex; align-items: center;justify-content: center;">');
+                        }
+
+                        img.insertAfter($('#photo'))
 
                         // initialize the selectize control's
                         var $select = $('#status').selectize();
@@ -384,6 +385,12 @@
                         let url = '{{ route("users.update", ":id") }}';
                         url = url.replace(':id', user.id);
                         userModal.find('form').attr('action', url);
+                    })
+                },
+                error: function (result) {
+                    Toast.fire({
+                        icon: 'error',
+                        html: '&nbsp;&nbsp;' + result.responseJSON.message
                     })
                 }
             });

@@ -113,9 +113,7 @@
 @section('main')
 
     <div style="display: flex">
-        <nav class="card rounded shadow-e-sm border-0 ml-3" style="height: 50px; max-width: 98%;">
-            @yield('breadcrumb')
-        </nav>
+        {{ Breadcrumbs::render('profile-end') }}
     </div>
 
     <main class="container bg-white shadow-e-sm border-0 mt-3 ml-3"
@@ -142,10 +140,8 @@
                                     <img id="img-span" alt="" class="mx-4" src="{{ asset('storage/users/' . $user->photo) }}"
                                          style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;justify-content: center;">
                                 @else
-                                    <span id="img-span" class="mx-4 material-icons"
+                                    <img id="img-span" alt="" class="mx-4" src="{{ asset('storage/noimage.jpg') }}"
                                          style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;justify-content: center;">
-                                        person
-                                    </span>
                                 @endif
 
                                 <div class="d-flex flex-column mt-1">

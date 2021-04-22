@@ -7,7 +7,7 @@
         <div class="userImg d-flex align-items-center p-0" style="height: 200px; width: 180px; justify-content: center">
             <img id="userImg" style="width: 150px; height: 150px; border-radius: 50%;
                                   align-items: center;justify-content: center;" class="border-0"
-                 src="http://express.test/storage/users/1617662168pr39y.jpeg">
+                 src="">
         </div>
 
         <div class="col align-items-start" id="userInfo">
