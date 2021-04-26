@@ -9,16 +9,14 @@ display: flex;justify-content: center; overflow: hidden; margin-left: 0 !importa
     <label class="cover-title"></label>
 
     <button type="button" id="closeBtn" class="pull-right border-0" onclick="closePanel()" style="position: absolute;
-  right: 0;z-index: 5;">
+  right: 0;z-index: 5;" title="Cerrar">
         <span class="material-icons" style="font-size: 18px">close</span>
     </button>
 </div>
 
 <div class="col-12 m-0 p-0" style="max-height: 68%; height: 68%;">
     <div class="description-container col-12" style="padding: 1.5rem 2rem 0.5rem 2.5rem;height: 23%; text-align: justify">
-        <p id="storeDescription" class="p-0 m-0" style="font-size: 13.6px">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <p id="storeDescription" class="p-0 m-0" style="font-size: 13.6px">
         </p>
     </div>
 

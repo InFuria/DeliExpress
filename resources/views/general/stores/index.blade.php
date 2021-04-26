@@ -4,29 +4,6 @@
 
 @section('styles')
     <style>
-        .stores-list:hover {
-            background-color: rgba(253, 79, 0, 0.1) !important;
-        }
-
-        .right-panel-empty {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 0.75rem !important;
-            margin-top: 1.50rem !important;
-            height: 93%;
-            width: 55%;
-            max-width: 55%;
-        }
-
-        .right-panel-content {
-            margin-left: 0.75rem !important;
-            margin-top: 1.50rem !important;
-            height: 93%;
-            width: 58%;
-            max-width: 58%;
-        }
-
         .product-right-panel {
             display: inline-flex;
             align-items: center;
@@ -40,13 +17,15 @@
         }
 
         .img-wrap {
-            display: inline-block;
+            display: contents;
             position: relative;
             overflow: hidden;
+            width: 1000px;
         }
 
         #storeCover {
             vertical-align: middle;
+            width: 100%;
         }
 
         .img-wrap:after {
@@ -123,7 +102,7 @@
                 <label class="label-primary">Recientes</label>
                 <div style="margin-top: 1rem" id="recent">
                     @foreach($stores->slice(0, 6) as $store)
-                        <button id="storeBtn" class="stores-list d-flex align-items-center border-0 bg-white rounded"
+                        <button id="storeBtn" class="item-list d-flex align-items-center border-0 bg-white rounded"
                                 style="width: 100%; height: 80px; cursor: pointer" value="{{ $store->id }}"
                                 onclick="getStoreData(this)">
 
@@ -413,7 +392,7 @@
                                 });
 
                                 recent.append(
-                                    '<button id="storeBtn" class="stores-list d-flex align-items-center border-0 bg-white rounded" ' +
+                                    '<button id="storeBtn" class="item-list d-flex align-items-center border-0 bg-white rounded" ' +
                                     'style="width: 100%; height: 80px; cursor: pointer" value="' + value.id + '" onclick="getStoreData(this)">' +
                                     '<img src="{{asset("/")}}' + logo + '" id="img-list"' +
                                     'style="width: 50px; height: 50px; border-radius: 50%; font-size: 28px; display: flex;' +
@@ -513,7 +492,6 @@
                     $(span).text("arrow_drop_up")
                 } else {
                     $(span).text("arrow_drop_down")
-                    /*todo recargar el contenido*/
                 }
             });
 
@@ -527,7 +505,7 @@
 
                 $('<div class="d-flex align-items-center mt-2">'+
                     '<input type="text" id="newCategory" class="new-input">'+
-                    '<button type="button" class="closeOutBtn pull-right border-0" onclick="removeInput(`newCategory`)">'+
+                    '<button type="button" class="closeOutBtn pull-right border-0" onclick="removeInput(`newCategory`)" title="Eliminar campo">'+
                     '<span class="material-icons" style="font-size: 18px">close</span></button>' +
                 '</div>').insertBefore($(element));
 
@@ -566,7 +544,7 @@
 
                 $('<div class="d-flex align-items-center mt-2">'+
                     '<input type="text" id="newSubCategory" class="new-input sub">'+
-                    '<button type="button" class="closeOutBtn pull-right border-0" onclick="removeInput(`newSubCategory`)">'+
+                    '<button type="button" class="closeOutBtn pull-right border-0" onclick="removeInput(`newSubCategory`)" title="Eliminar campo">'+
                     '<span class="material-icons" style="font-size: 18px">close</span></button>' +
                     '</div>').insertBefore($(element));
 
@@ -628,7 +606,7 @@
                                 '</a>' +
                             '</div>' +
                         '</div>' +
-                        '<a type="button" id="deleteCategory" class="closeOutBtn pull-right border-0"' +
+                        '<a type="button" id="deleteCategory" class="closeOutBtn pull-right border-0" title="Eliminar categoria" ' +
                         'data-toggle="modal" data-target="#deleteModal" data-type="deleteCategory" data-id="' + data.id + '" data-name="' + data.name + '"' +
                         'style="top: 3px;right: 0;position: absolute; visibility: hidden"><span class="material-icons" style="font-size: 18px">close</span>' +
                         '</a>'+
@@ -640,7 +618,7 @@
                     .prepend(
                         '<div class="d-flex align-items-center" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)">' +
 
-                            '<a type="button" id="deleteSubCategory" class="closeOutBtn pull-right border-0"' +
+                            '<a type="button" id="deleteSubCategory" class="closeOutBtn pull-right border-0" title="Eliminar sub-categoria" ' +
                             'data-toggle="modal" data-target="#deleteModal" data-type="deleteSubCategory" data-id="' + data.id + '" data-name="' + data.name + '"' +
                             'style="position: absolute; visibility: hidden">' +
                             '<span class="material-icons" style="font-size: 18px">close</span>' +
@@ -753,7 +731,7 @@
                                             '<label class="label-text-form mb-0" id="price">$' + price + '</label>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<a type="button" id="deleteProduct" class="closeOutBtn pull-right border-0"' +
+                                    '<a type="button" id="deleteProduct" class="closeOutBtn pull-right border-0" title="Eliminar producto" ' +
                                     'data-toggle="modal" data-target="#deleteModal" data-type="deleteProduct" data-id="' + v.id + '" data-name="' + v.name + '"' +
                                     'style="top: 0; right: 0; position: absolute;visibility: hidden">' +
                                     '<span class="material-icons" style="font-size: 18px">close</span>' +
@@ -988,7 +966,7 @@
             if (element.hasClass('e-active') === false)
                 element.addClass('e-active')
 
-            $('.stores-list').not(element).removeClass('e-active')
+            $('.item-list').not(element).removeClass('e-active')
 
             @permission('stores.store')
             let storeId = $(button).val();

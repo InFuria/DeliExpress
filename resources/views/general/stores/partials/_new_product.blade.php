@@ -2,7 +2,7 @@
     <div class="d-flex">
         <label class="label-primary-form">Nuevo producto</label>
 
-        <button type="button" id="closeBtn" class="pull-right border-0" onclick="closeProductPanel()" style="position: absolute;right: 3%; z-index: 5;">
+        <button type="button" id="closeBtn" class="pull-right border-0" onclick="closeProductPanel()" style="position: absolute;right: 3%; z-index: 5;" title="Cerrar formulario de producto">
             <span class="material-icons" style="font-size: 18px">close</span>
         </button>
     </div>
