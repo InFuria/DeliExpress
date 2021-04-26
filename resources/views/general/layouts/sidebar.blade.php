@@ -28,19 +28,19 @@
                     <span class="material-icons icon-sidebar mr-2">manage_accounts</span>
                     Usuarios
                 </a>
-                <a class="dropdown-sidebar" href="{{ route('roles.index') }}">
+<!--                <a class="dropdown-sidebar" href="{{ route('roles.index') }}">
                     <span class="material-icons icon-sidebar mr-2">room_preferences</span>
                     Roles
                 </a>
                 <a class="dropdown-sidebar" href="{{ route('permissions.index') }}">
                     <span class="material-icons icon-sidebar mr-2">description</span>
                     Permisos
-                </a>
+                </a>-->
             </div>
         </div>
     @endrole
 
-    <a class="menu-option menu-inactive d-flex justify-content-left align-items-center {{ \Request::path() == 'orders' ? 'menu-active' : 'menu-inactive' }}">
+    <a href="{{ route('orders.index') }}" class="menu-option menu-inactive d-flex justify-content-left align-items-center {{ \Request::path() == 'orders' ? 'menu-active' : 'menu-inactive' }}">
         <span class="material-icons icon-sidebar">add_shopping_cart</span>
         Pedidos
     </a>
@@ -50,7 +50,7 @@
         Clientes
     </a>
 
-    <a class="menu-option menu-inactive d-flex justify-content-left align-items-center {{ \Request::path() == 'stores' ? 'menu-active' : 'menu-inactive' }}">
+    <a href="{{ route('stores.index') }}" class="menu-option d-flex justify-content-left align-items-center {{ \Request::path() == 'stores' ? 'menu-active' : 'menu-inactive' }}">
         <span class="material-icons icon-sidebar">store</span>
         Negocios
     </a>
@@ -60,7 +60,7 @@
         Repartidores
     </a>
 
-    <a class="menu-option menu-inactive d-flex justify-content-left align-items-center {{ \Request::path() == 'coupons' ? 'menu-active' : 'menu-inactive' }}">
+    <a href="{{ route('coupons.index') }}" class="menu-option menu-inactive d-flex justify-content-left align-items-center {{ \Request::path() == 'coupons' ? 'menu-active' : 'menu-inactive' }}">
         <span class="material-icons icon-sidebar">local_offer</span>
         Cupones
     </a>

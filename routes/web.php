@@ -51,6 +51,9 @@ Route::group(['namespace' => 'General', 'middleware' => ['auth', 'verified']], f
 
     Route::resource('orders', 'OrderController');
 
+    Route::resource('coupons', 'CouponController')->except(['create', 'edit']);
+    Route::post('coupons/status/{coupon}', 'CouponController@status')->name('coupons.status');
+
 
     /*
     |--------------------------------------
