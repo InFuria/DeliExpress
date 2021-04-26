@@ -15,6 +15,21 @@ p,a, input {
     font-family: 'Mulish' !important;
 }
 
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: black !important;;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;;
+    transition: background-color 5000s ease-in-out 0s !important;;
+}
+
 .sidebar {
     display: flex;
     width: 250px;
@@ -477,10 +492,6 @@ button text {
 
 .btn-out-default {
     position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
 
     border: 1px solid #E5E5E5;
     box-sizing: border-box;
@@ -571,8 +582,8 @@ button text {
 }
 
 .btn-out-extra {
-    height: 40px;
-    width: 306px;
+    height: 40px !important;
+    width: 306px !important;
     background-color: white;
     text-align: center;
     justify-content: center
@@ -731,17 +742,9 @@ h6 {
 }
 
 .sub-2 {
-    /* Subtitle 2 (14) */
-    position: absolute;
-    width: 107px;
-    height: 20px;
-    left: 836px;
-    top: 1272px;
 
-    /* Subtitle 2 */
     font-family: Mulish;
     font-style: normal;
-    font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     /* identical to box height */
@@ -751,8 +754,6 @@ h6 {
 
     /* Black-ish */
     color: #393E41;
-
-
 }
 
 .body-1 {
@@ -967,7 +968,7 @@ caption {
     letter-spacing: 1.25px;
     text-transform: uppercase;
 
-    color: #FD4F00;
+    color: #FD4F00 !important;
 }
 
 .text-compl {
@@ -1296,6 +1297,29 @@ dd {
     background-color: transparent;
 }
 
+.right-panel-empty {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.75rem !important;
+    margin-top: 1.50rem !important;
+    height: 93%;
+    width: 55%;
+    max-width: 55%;
+}
+
+.right-panel-content {
+    margin-left: 0.75rem !important;
+    margin-top: 1.50rem !important;
+    height: 93%;
+    width: 60%;
+    max-width: 60%;
+}
+
+.item-list:hover {
+    background-color: rgba(253, 79, 0, 0.1) !important;
+}
+
 .sub-ul {
     display: flex !important;
     width: 90% !important;
@@ -1431,4 +1455,8 @@ dd {
 .breadcrumb-item + .breadcrumb-item::before {
     font-size: 11px !important;
     color: #979797;
+}
+
+.bottom-divider{
+    border-bottom: 1px solid #E5E5E5;
 }

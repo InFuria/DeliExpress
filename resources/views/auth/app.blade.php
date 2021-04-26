@@ -13,6 +13,8 @@
 
     <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
 
+    <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/express.css') }}">
+
     <link rel="stylesheet" type="text/css" href="{{ Asset('assets/css/atmos.min.css') }}">
     <link rel="stylesheet" href="{{ Asset('assets/vendor/pace/pace.css') }}">
     <script src="{{ Asset('assets/vendor/pace/pace.min.js') }}"></script>
