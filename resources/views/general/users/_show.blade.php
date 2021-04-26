@@ -1,5 +1,5 @@
 <div class="col-12 p-0 shadow-e-sm" style="height: 34%;">
-    <button type="button" id="closeBtn" class="pull-right" onclick="closePanel()">
+    <button type="button" id="closeBtn" class="pull-right" onclick="closePanel()" title="Cerrar">
         <span class="material-icons">close</span>
     </button>
 

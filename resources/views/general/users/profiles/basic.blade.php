@@ -51,33 +51,6 @@
             color: #FF7334 !important;
         }
 
-        .users-list:hover {
-            background-color: #FF7334 !important;
-        }
-
-        .users-list:hover #roleLbl {
-            color: white !important;
-        }
-
-        dl {
-            font-family: 'Mulish' !important;
-            line-height: 20px !important;
-            color: #979797 !important;
-
-            width: 100%;
-            overflow: hidden;
-            padding: 0;
-            margin: 0;
-        }
-        dt {
-            float: left;
-            width: 25%;
-        }
-        dd {
-            float: left;
-            width: 75%;
-        }
-
         .right-panel-empty {
             display: inline-flex;
             align-items: center;

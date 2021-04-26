@@ -2,33 +2,6 @@
 
 @section('title', 'Usuarios')
 
-@section('styles')
-    <style>
-
-        .users-list:hover {
-            background-color: rgba(253, 79, 0, 0.1) !important;
-        }
-
-        .right-panel-empty {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 0.75rem !important;
-            margin-top: 1.50rem !important;
-            height: 93%;
-            width: 55%;
-            max-width: 55%;
-        }
-
-        .right-panel-content {
-            margin-left: 0.75rem !important;
-            margin-top: 1.50rem !important;
-            height: 93%;
-            width: 60%;
-            max-width: 60%;
-        }
-    </style>
-@endsection
 @section('main')
 
     <div style="display: flex">
@@ -69,7 +42,7 @@
                 <label class="label-primary">Recientes</label>
                 <div style="margin-top: 1rem" id="recent">
                     @foreach($users->slice(0, 6) as $user)
-                        <button id="userBtn" class="users-list d-flex align-items-center border-0 bg-white rounded"
+                        <button id="userBtn" class="item-list d-flex align-items-center border-0 bg-white rounded"
                                 style="width: 100%; height: 80px; cursor: pointer" value="{{ $user->id }}"
                                 onclick="getUserData(this)">
 
@@ -196,7 +169,7 @@
                                 let photo = value.photo !== "" ? "storage/users/" + value.photo : "storage/noimage.jpg";
 
                                 recent.append(
-                                    '<button id="userBtn" class="users-list d-flex align-items-center border-0 bg-white rounded" ' +
+                                    '<button id="userBtn" class="item-list d-flex align-items-center border-0 bg-white rounded" ' +
                                     'style="width: 100%; height: 80px; cursor: pointer" value="' + value.id + '" onclick="getUserData(this)">' +
                                     '<img src="{{asset("/")}}' + photo + '" id="img-list"' +
                                     'style="width: 50px; height: 50px; border-radius: 50%; font-size: 28px; display: flex;' +
@@ -264,9 +237,9 @@
             if (element.hasClass('e-active') === false)
                 element.addClass('e-active')
 
-            $('.users-list').not(element).removeClass('e-active')
+            $('.item-list').not(element).removeClass('e-active')
 
-            @permission('users.update')
+            @permission('users.show')
             let userId = $(button).val();
 
             $.ajax({
@@ -331,61 +304,70 @@
                     route = route.replace(':id', result.user.id);
                     $('#resend').attr("href", route);
 
-                    let userModal = $('#exampleModal');
-                    $('#editUser').on('click', function (){
+                    @permission('users.update')
+                        let userModal = $('#exampleModal');
+                        $('#editUser').on('click', function (){
 
-                        resetHeaders()
+                            resetHeaders()
 
-                        if (userModal.find('input[name="_method"]').length === 0){
-                            userModal.find('form').prepend('<input type="hidden" name="_method" value="patch">');
-                        }
+                            if (userModal.find('input[name="_method"]').length === 0){
+                                userModal.find('form').prepend('<input type="hidden" name="_method" value="patch">');
+                            }
 
-                        userModal.find('.modal-title').val('Editar usuario');
-                        userModal.show();
+                            userModal.find('.modal-title').val('Editar usuario');
+                            userModal.show();
 
-                        let user = result.user;
-                        userModal.find('#name').val(user.name)
-                        userModal.find('#username').val(user.username)
-                        userModal.find('#phone').val(user.phone)
-                        userModal.find('#email').val(user.email)
+                            let user = result.user;
+                            userModal.find('#name').val(user.name)
+                            userModal.find('#username').val(user.username)
+                            userModal.find('#phone').val(user.phone)
+                            userModal.find('#email').val(user.email)
 
-                        userModal.find('#img-span').remove()
+                            userModal.find('#img-span').remove()
 
-                        let route = '{{ asset("storage/users") }}/' + user.photo;
+                            let route = '{{ asset("storage/users") }}/' + user.photo;
 
-                        let img;
-                        if(user.photo === '' || user.photo === null){
-                            img = $('<span id="img-span" class="material-icons material-icons mx-4"'+
-                                'style="background: rgba(229, 229, 229, 1); width: 64px; height: 64px; border-radius: 50%; font-size: 28px; display: flex;'+
-                                'align-items: center;justify-content: center; color: white">'+
-                                'cloud_upload</span>');
-                        } else{
-                            img = $('<img id="img-span" class="mx-4" src="' + route + '" style="width: 64px; height: 64px; border-radius: 50%;' +
-                                ' display: flex; align-items: center;justify-content: center;">');
-                        }
+                            let img;
+                            if(user.photo === '' || user.photo === null){
+                                img = $('<span id="img-span" class="material-icons material-icons mx-4"'+
+                                    'style="background: rgba(229, 229, 229, 1); width: 64px; height: 64px; border-radius: 50%; font-size: 28px; display: flex;'+
+                                    'align-items: center;justify-content: center; color: white">'+
+                                    'cloud_upload</span>');
+                            } else{
+                                img = $('<img id="img-span" class="mx-4" src="' + route + '" style="width: 64px; height: 64px; border-radius: 50%;' +
+                                    ' display: flex; align-items: center;justify-content: center;">');
+                            }
 
-                        img.insertAfter($('#photo'))
+                            img.insertAfter($('#photo'))
 
-                        // initialize the selectize control's
-                        var $select = $('#status').selectize();
-                        $select[0].selectize.setValue(user.status);
+                            // initialize the selectize control's
+                            var $select = $('#status').selectize();
+                            $select[0].selectize.setValue(user.status);
 
-                        var $select = $('#role').selectize();
-                        $select[0].selectize.setValue(user.role.id);
+                            var $select = $('#role').selectize();
+                            $select[0].selectize.setValue(user.role.id);
 
-                        var $select = $('#permissions').selectize();
-                        let permissionsId = [];
+                            var $select = $('#permissions').selectize();
+                            let permissionsId = [];
 
-                        $.each(user.permissions, function (key, item) {
-                            permissionsId.push(this.id);
-                        });
+                            $.each(user.permissions, function (key, item) {
+                                permissionsId.push(this.id);
+                            });
 
-                        $select[0].selectize.setValue(permissionsId);
+                            $select[0].selectize.setValue(permissionsId);
 
-                        let url = '{{ route("users.update", ":id") }}';
-                        url = url.replace(':id', user.id);
-                        userModal.find('form').attr('action', url);
-                    })
+                            let url = '{{ route("users.update", ":id") }}';
+                            url = url.replace(':id', user.id);
+                            userModal.find('form').attr('action', url);
+                        })
+                    @else
+                        Toast.fire({
+                            icon: 'error',
+                            html: '&nbsp;&nbsp;' + "No posee permisos para actualizar usuarios"
+                        })
+                    @endpermission
+
+
                 },
                 error: function (result) {
                     Toast.fire({
@@ -394,6 +376,11 @@
                     })
                 }
             });
+            @else
+                Toast.fire({
+                    icon: 'error',
+                    html: '&nbsp;&nbsp;' + "No posee permisos para ver el detalle de usuarios"
+                })
             @endpermission
         }
 
