@@ -1,9 +1,7 @@
-<div class="col-12 p-0 m-0 border-0 rounded-top shadow-e-md" id="coverContainer" style="max-height: 23%; height: 23%;
-display: flex;justify-content: center; overflow: hidden; margin-left: 0 !important; background-color: rgba(229, 229, 229, 1)">
+<div class="col-12 img-container p-0 m-0 border-0 rounded-top shadow-e-md" id="coverContainer">
 
-    <div class="img-wrap m-0 p-0"
-         style="justify-content: center;position: relative;display: inline-flex;border-radius: 6px 6px 0 0">
-        <img id="storeCover" src="" alt="" style="flex: none;"/>
+    <div class="img-wrap m-0 p-0" style="justify-content: center;position: relative;display: inline-flex;border-radius: 6px 6px 0 0">
+        <img id="storeCover" class="img-content" src="" alt="" style="flex: none;"/>
     </div>
 
     <label class="cover-title"></label>

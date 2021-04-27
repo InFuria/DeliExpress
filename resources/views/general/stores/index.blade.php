@@ -16,28 +16,6 @@
             border-radius: 6px;
         }
 
-        .img-wrap {
-            display: contents;
-            position: relative;
-            overflow: hidden;
-            width: 1000px;
-        }
-
-        #storeCover {
-            vertical-align: middle;
-            width: 100%;
-        }
-
-        .img-wrap:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-
         .store-border-bottom {
             border-bottom: 1px solid #E5E5E5;
         }
@@ -118,8 +96,7 @@
                                     {{ $store->long_name }}
                                 </label>
 
-                                <label class="label-text-form searchBottomLbl"
-                                       style="font-size: 14px; line-height: 18px;margin-bottom: 0 !important; border: 0; cursor: pointer">
+                                <label class="label-text-form searchBottomLbl">
                                     @foreach($store->categories as $cat)
                                         {{ $cat->name }} {{ $store->categories->last()->id == $cat->id ? '' : ' - ' }}
                                     @endforeach
@@ -401,8 +378,7 @@
                                     '<label id="nameLbl" class="label-text-form"' +
                                     'style="color: black; font-size: 16px; letter-spacing: 0.05rem; margin-bottom: 4px !important;  border: 0; cursor: pointer">' +
                                     value.long_name + '</label>' +
-                                    '<label class="label-text-form searchBottomLbl"' +
-                                    'style="font-size: 14px; line-height: 18px;margin-bottom: 0 !important; border: 0; cursor: pointer">' +
+                                    '<label class="label-text-form searchBottomLbl">' +
                                     categories + '</label></div></button>'
                                 )
 

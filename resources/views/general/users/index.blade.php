@@ -55,8 +55,7 @@
                                        style="color: black; font-size: 16px; letter-spacing: 0.05rem; margin-bottom: 4px !important;  border: 0; cursor: pointer">
                                     {{ $user->name }} ({{ $user->username }})
                                 </label>
-                                <label class="label-text-form searchBottomLbl"
-                                       style="font-size: 14px; line-height: 18px;margin-bottom: 0 !important; border: 0; cursor: pointer">{{ $user->role->name }}</label>
+                                <label class="label-text-form searchBottomLbl">{{ $user->role->name }}</label>
                             </div>
                         </button>
                     @endforeach
@@ -178,8 +177,7 @@
                                     '<label id="nameLbl" class="label-text-form"' +
                                     'style="color: black; font-size: 16px; letter-spacing: 0.05rem; margin-bottom: 4px !important;  border: 0; cursor: pointer">' +
                                     value.name + ' (' + value.username + ')</label>' +
-                                    '<label class="label-text-form searchBottomLbl"' +
-                                    'style="font-size: 14px; line-height: 18px;margin-bottom: 0 !important; border: 0; cursor: pointer">' +
+                                    '<label class="label-text-form searchBottomLbl">' +
                                     value.role.name + '</label></div></button>'
                                 )
 
@@ -191,8 +189,7 @@
                                 '<span class="material-icons" style="width: 50px; height: 50px; border-radius: 50%; font-size: 28px; display: flex;' +
                                 'align-items: center;justify-content: center; margin-left: 0.5rem; margin-right: 1.5rem; background-color: #FD4F00; color: white">warning</span>' +
                                 '<div class="d-flex flex-column" style="justify-content: center;">' +
-                                '<label class="label-text-form searchBottomLbl"' +
-                                'style="font-size: 18px; line-height: 18px;margin-bottom: 0 !important; border: 0; pointer-events: none !important;">' +
+                                '<label class="label-text-form searchBottomLbl">' +
                                 'No se han encontrado resultados' +
                                 '</label></div></button>'
                             );
