@@ -1,5 +1,5 @@
 @if (count($breadcrumbs))
-    <nav class="card rounded shadow-e-sm border-0 ml-3" style="height: 50px; max-width: 82%; width: 82%">
+    <nav class="card rounded shadow-e-sm border-0 ml-3" id="breadcrumb-nav" style="height: 50px; max-width: 82%; width: 82%">
         <ol class="breadcrumb bg-white" style="margin-bottom: 0 !important; height: 100% !important;align-items: center !important;">
             @foreach ($breadcrumbs as $breadcrumb)
 
