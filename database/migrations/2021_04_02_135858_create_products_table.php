@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('status');
             $table->bigInteger('store_id')->unsigned();
-            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('status');
             $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('product_categories')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('product_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
@@ -39,10 +39,11 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->string('img');
             $table->double('price', 10, 2);
+            $table->double('cost', 10, 2);
             $table->bigInteger('store_id')->unsigned();
-            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('sub_categories')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('sub_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
