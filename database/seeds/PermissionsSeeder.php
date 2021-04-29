@@ -14,7 +14,7 @@ class PermissionsSeeder extends Seeder
     {
         \Eloquent::unguard();
 
-        $path = 'storage/database/permissions.sql';
+        $path = 'storage/querys/permissions.sql';
         \DB::unprepared(file_get_contents($path));
         $this->command->info('Permissions table seeded!');
     }

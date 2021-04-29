@@ -24,7 +24,6 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
-            $table->timestamps();
         });
 
         Schema::create('permission_role', function (Blueprint $table) {
@@ -53,7 +52,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        /*Schema::dropIfExists('role_user');*/
         Schema::dropIfExists('permission_user');
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permissions');

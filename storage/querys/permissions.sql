@@ -11,10 +11,10 @@ INSERT INTO permissions(name, slug) values
 
 ('Ver productos', 'products.index'), ('Crear productos', 'products.store'), ('Actualizar productos', 'products.update'), ('Ver detalle de producto', 'products.show'), ('Eliminar productos', 'products.destroy'), ('Listar productos', 'products.list'),
 
-('Ver clientes', 'clients.index'), ('Crear clientes', 'clients.store'), ('Actualizar clientes', 'clients.update'), ('Ver detalle de cliente', 'clients.show'), ('Eliminar clientes', 'clients.destroy'),
+('Ver clientes', 'clients.index'), ('Crear clientes', 'clients.store'), ('Actualizar clientes', 'clients.update'), ('Ver detalle de cliente', 'clients.show'), ('Eliminar clientes', 'clients.destroy'), ('Actualizar estado de clientes', 'clients.status'),
 
 ('Ver delivery', 'delivery.index'), ('Crear delivery', 'delivery.store'), ('Actualizar delivery', 'delivery.update'), ('Ver detalle de delivery', 'delivery.show'), ('Eliminar delivery', 'delivery.destroy'),
 
-('Ver cupones', 'coupons.index'), ('Crear cupones', 'coupons.store'), ('Actualizar cupones', 'coupons.update'), ('Ver detalle de cupon', 'coupons.show'), ('Eliminar cupones', 'coupons.destroy'),
+('Ver cupones', 'coupons.index'), ('Crear cupones', 'coupons.store'), ('Actualizar cupones', 'coupons.update'), ('Ver detalle de cupon', 'coupons.show'), ('Eliminar cupones', 'coupons.destroy'), ('Actualizar estado de cupones', 'coupons.status'),
 
 ('Ver ordenes', 'orders.index'), ('Crear ordenes', 'orders.store'), ('Actualizar ordenes', 'orders.update'), ('Ver detalle de orden', 'orders.show'), ('Eliminar ordenes', 'orders.destroy');
