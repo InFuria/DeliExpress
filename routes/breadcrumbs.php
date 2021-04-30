@@ -108,3 +108,14 @@ Breadcrumbs::for('profile-end', function ($trail) {
     $trail->parent('profile');
     $trail->push('Detalles', '', ['icon' => 'face_retouching_natural']);
 });
+
+
+/** Ubicaciones **/
+Breadcrumbs::for('locations', function ($trail) {
+    $trail->push('Ubicaciones', route('locations.index'), ['icon' => 'map']);
+});
+
+Breadcrumbs::for('locations-end', function ($trail) {
+    $trail->parent('locations');
+    $trail->push('Detalles', '', ['icon' => 'list']);
+});
