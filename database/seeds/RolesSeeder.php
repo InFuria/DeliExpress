@@ -18,6 +18,11 @@ class RolesSeeder extends Seeder
         $role->save();
 
         $role = new Role;
+        $role->name = "No asignado";
+        $role->slug = "not_assigned";
+        $role->save();
+
+        $role = new Role;
         $role->name = "Administrador General";
         $role->slug = "admin";
         $role->save();

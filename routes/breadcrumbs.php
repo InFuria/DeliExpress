@@ -22,6 +22,17 @@ Breadcrumbs::for('users-end', function ($trail) {
 });
 
 
+/** Roles **/
+Breadcrumbs::for('roles', function ($trail) {
+    $trail->push('Roles', route('roles.index'), ['icon' => 'room_preferences']);
+});
+
+Breadcrumbs::for('roles-end', function ($trail) {
+    $trail->parent('roles');
+    $trail->push('Todos los roles', '', ['icon' => 'list']);
+});
+
+
 /** Pedidos **/
 Breadcrumbs::for('orders', function ($trail) {
     $trail->push('Pedidos', route('orders.index'), ['icon' => 'add_shopping_cart']);
@@ -117,5 +128,16 @@ Breadcrumbs::for('locations', function ($trail) {
 
 Breadcrumbs::for('locations-end', function ($trail) {
     $trail->parent('locations');
+    $trail->push('Detalles', '', ['icon' => 'list']);
+});
+
+
+/** Categorias de negocios **/
+Breadcrumbs::for('categories', function ($trail) {
+    $trail->push('Categorias', route('categories.index'), ['icon' => 'class']);
+});
+
+Breadcrumbs::for('categories-end', function ($trail) {
+    $trail->parent('categories');
     $trail->push('Detalles', '', ['icon' => 'list']);
 });

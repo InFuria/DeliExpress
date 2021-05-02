@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RoleRequest extends FormRequest
 {
@@ -25,23 +26,8 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'required|string',
-            'description'       => 'required|string'
-        ];
-    }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'name.required'         => 'El campo de nombre es obligatorio.',
-            'name.string'           => 'El campo de nombre no es valido.',
-            'description.required'  => 'El campo de descripcion es obligatorio.',
-            'description.string'    => 'El campo descripcion no es valido.',
+            'name'  => 'required|string',
+            'slug'  => ["required", "string", Rule::unique('roles')->ignore($this->role)]
         ];
     }
 }
